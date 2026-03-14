@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verification Failed</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    width:100%;
+    background: linear-gradient(to bottom, #141130, #000000);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+/* ================= TOP BAR ================= */
+
+.top-card{
+    width:100%;
+    height:9%;
+    background-color:#151422;
+    border:1px solid #2f2c4a;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    display:flex;
+    align-items:center;
+    padding:0 20px;
+    z-index:1000;
+}
+
+.top-bar{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.profile-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.profile-left img{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#222;
+}
+
+.user-info{
+    display:flex;
+    flex-direction:column;
+    font-size:13px;
+    text-align:left;
+    color:#fff;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 18px;
+    border-radius:50px;
+    background:#2A1414;
+    border:1px solid #5A1F1F;
+    color:#FF5C5C;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.status::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#FF3B3B;
+}
+
+/* ================= MAIN ================= */
+
+.containerr{
+    margin-top:120px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* ================= WARNING SECTION ================= */
+
+.verify-wrapper{
+    position:relative;
+    width:260px;
+    height:260px;
+    margin-bottom:50px;
+}
+
+.verify-wrapper svg{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+
+.outermost{ width:185px; height:185px;}
+.outer{ width:165px; height:165px;}
+.inner{ width:80px; height:80px;}
+
+/* 🔴 CENTER BLUR DOT */
+.blur-dot{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:55px;
+    height:55px;
+    background:#ff2b2b;
+    border-radius:50%;
+    filter:blur(30px);
+    opacity:0.9;
+}
+
+/* ================= TEXT ================= */
+
+h1{
+    font-size:200%;
+    font-weight:600;
+    color:#FF4D4D;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    font-size:15px;
+    color:#8F8F99;
+    margin-bottom:10px;
+}
+
+/* ================= BUTTON ================= */
+
+.bot-button{
+    background-color:#FF4D4D;
+    color:#FFFFFF;
+    border:none;
+    letter-spacing:2px;
+    font-size:16px;
+    width:350px;
+    height:70px;
+    font-weight:bold;
+    cursor:pointer;
+    border-radius:12px;
+    box-shadow:0 0 15px rgba(255,0,0,0.6);
+    text-transform:uppercase;
+    margin-top:40px;
+    transition:0.3s ease;
+}
+
+.bot-button:hover{
+    transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-card">
+    <div class="top-bar">
+        <div class="profile-left">
+            <img id="profilePic">
+            <div class="user-info">
+                <strong id="profileName"></strong>
+                <small id="profileId"></small>
+            </div>
+        </div>
+        <div class="status">ACTIVE</div>
+    </div>
+</div>
+
+<div class="containerr">
+    <div class="container">
+
+        <div class="verify-wrapper">
+
+            <!-- OUTER RING -->
+            <svg class="outermost" viewBox="0 0 400 400">
+                <circle cx="200" cy="200" r="180"
+                    fill="none"
+                    stroke="#FF4D4D"
+                    stroke-width="6"/>
+            </svg>
+
+            <!-- INNER RING -->
+            <svg class="outer" viewBox="0 0 400 400">
+                <circle cx="200" cy="200" r="180"
+                    fill="none"
+                    stroke="#B33939"
+                    stroke-width="4"/>
+            </svg>
+
+            <!-- CENTER BLUR DOT -->
+            <div class="blur-dot"></div>
+
+            <!-- WARNING ICON -->
+            <svg class="inner" viewBox="0 0 100 100">
+
+                <path
+                    d="M50 12 L88 80 Q90 84 84 86 L16 86 Q10 84 12 80 Z"
+                    fill="none"
+                    stroke="#FF4D4D"
+                    stroke-width="8"
+                    stroke-linejoin="round"
+                />
+
+                <line x1="50" y1="40" x2="50" y2="60"
+                    stroke="#FF4D4D"
+                    stroke-width="8"
+                    stroke-linecap="round"/>
+
+                <circle cx="50" cy="74" r="5" fill="#FF4D4D"/>
+
+            </svg>
+
+        </div>
+
+        <h1><b>Verification Failed</b></h1>
+
+        <div class="subtitle">
+            You can still continue to our Bot.
+        </div>
+
+        <button class="bot-button">CONTINUE TO BOT</button>
+
+    </div>
+</div>
+
+<script>
+const tg = window.Telegram.WebApp;
+tg.expand();
+
+const user = tg.initDataUnsafe?.user;
+
+if(user){
+    document.getElementById("profileName").innerText =
+        user.first_name + (user.last_name ? " " + user.last_name : "");
+    document.getElementById("profileId").innerText =
+        "ID: " + user.id;
+
+    if(user.photo_url){
+        document.getElementById("profilePic").src = user.photo_url;
+    }
+}
+</script>
+
+</body>
+</html>

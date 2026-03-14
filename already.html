@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Already Verified</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    width:100%;
+    background: linear-gradient(to bottom, #141130, #000000);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+/* ================= TOP CARD ================= */
+
+.top-card{
+    width:100%;
+    height:9%;
+    background-color:#151422;
+    border-bottom:1px solid #2f2c4a;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    display:flex;
+    align-items:center;
+    padding:0 20px;
+    z-index:1000;
+}
+
+.top-bar{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.profile-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.profile-left img{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#222;
+}
+
+.user-info{
+    display:flex;
+    flex-direction:column;
+    font-size:13px;
+    text-align:left;
+    color:white;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 18px;
+    border-radius:50px;
+    background:#182426;
+    border:1px solid #314444;
+    color:#1DC562;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.status::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#1DC562;
+}
+
+/* ================= MAIN CARD ================= */
+
+.containerr{
+    margin-top:100px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.cardd{
+    width:500px;
+    height:550px;
+    background: linear-gradient(to bottom, #1A1830, #060606);
+    border-radius:30px;
+    box-shadow:0 4px 30px rgba(0,0,0,0.7);
+    border:1px solid #1F1E26;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:500px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+/* ================= VERIFY AREA ================= */
+
+.verify-wrapper{
+    position:relative;
+    width:260px;
+    height:260px;
+    margin-bottom:50px;
+}
+
+.verify-wrapper svg,
+.glow-layer,
+.center-image{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+}
+
+.outermost{ width:205px; height:205px; }
+.outer{ width:180px; height:180px; }
+
+/* ================= Glow Dot ================= */
+
+.glow-laer{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background: radial-gradient(circle,
+        rgba(77,163,255,0.6) 0%,
+        rgba(77,163,255,0.45) 20%,
+        rgba(77,163,255,0.25) 40%,
+        rgba(77,163,255,0.08) 60%,
+        transparent 85%);
+}
+.glow-layer{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:70px;
+    height:70px;
+    background:#4882DC;
+    border-radius:50%;
+    filter:blur(30px);
+    opacity:0.9;
+}
+
+/* ================= CENTER IMAGE ================= */
+
+.center-image{
+    width:85px;
+    height:85px;
+    object-fit:contain;
+    z-index:5;
+    pointer-events:none;
+}
+
+/* ================= TEXT ================= */
+
+h1{
+    font-size:200%;
+    font-weight:600;
+    color:#5F9FF0;
+    margin-bottom:15px;
+}
+
+.subtitle{
+    font-size:15px;
+    color:#9699A2;
+    margin-bottom:10px;
+}
+
+/* ================= BUTTON ================= */
+
+.bot-button{
+    background: #3B82F6;
+    color:#F5FEFF;
+    border:none;
+    width:350px;
+    height:65px;
+    border-radius:14px;
+    font-weight:600;
+    font-size:16px;
+    letter-spacing:1px;
+    cursor:pointer;
+    margin-top:40px;
+    transition:0.3s;
+    box-shadow:0 0 40px rgba(58,141,255,0.4);
+}
+
+.bot-button:hover{
+    transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-card">
+    <div class="top-bar">
+        <div class="profile-left">
+            <img id="profilePic">
+            <div class="user-info">
+                <strong id="profileName"></strong>
+                <small id="profileId"></small>
+            </div>
+        </div>
+        <div class="status">ACTIVE</div>
+    </div>
+</div>
+
+<div class="containerr">
+    <div class="cardd">
+        <div class="container">
+
+            <div class="verify-wrapper">
+
+                <svg class="outermost" viewBox="0 0 400 400">
+                    <circle cx="200" cy="200" r="180"
+                        fill="none"
+                        stroke="#4882DC"
+                        stroke-width="3"/>
+                </svg>
+
+                <svg class="outer" viewBox="0 0 400 400">
+                    <circle cx="200" cy="200" r="180"
+                        fill="none"
+                        stroke="#3D4D80"
+                        stroke-width="5"/>
+                </svg>
+
+                <div class="glow-layer"></div>
+
+                <img class="center-image"
+                src="https://i.ibb.co/r2qC01gR/20260228-183405.png">
+
+            </div>
+
+            <h1><b>Already Verified</b></h1>
+
+            <div class="subtitle">
+              You're checked you can continue to bot.
+            </div>
+
+            <button class="bot-button">CONTINUE TO BOT</button>
+
+        </div>
+    </div>
+</div>
+
+<script>
+const tg = window.Telegram.WebApp;
+tg.expand();
+
+const user = tg.initDataUnsafe?.user;
+
+if(user){
+    document.getElementById("profileName").innerText =
+        user.first_name + (user.last_name ? " " + user.last_name : "");
+    document.getElementById("profileId").innerText =
+        "ID: " + user.id;
+
+    if(user.photo_url){
+        document.getElementById("profilePic").src = user.photo_url;
+    }
+}
+</script>
+
+</body>
+</html>
