@@ -1,46 +1,79 @@
-export default function handler(req, res) {
-  // Get the full URL from the request
-  const fullUrl = `https://${req.headers.host}${req.url}`;
-  
-  // Parse the query parameters from the original link
-  const webhookUrl = req.query.webhookUrl;
-  const botId = req.query.botId;
-  const tgWebAppData = req.query.tgWebAppData;
-  
-  // Extract user data from the query parameters
-  let userId = null;
-  let userData = null;
-  
-  // The user data is URL encoded in the tgWebAppData parameter
-  // In your actual link, it's in the main URL path, so we need to reconstruct
-  // For demo purposes, we'll redirect with the parameters
-  
-  // Determine which page to show based on verification status
-  // This is where you'd add your actual verification logic
-  // For demo, we'll randomly show success (you should implement real logic)
-  
-  // Example verification logic:
-  const verificationStatus = 'success'; // Change this based on your actual verification
-  
-  // Redirect to appropriate page with user data
-  let redirectUrl;
-  const baseUrl = `https://${req.headers.host}`;
-  
-  if (verificationStatus === 'success') {
-    redirectUrl = `${baseUrl}/success`;
-  } else if (verificationStatus === 'already') {
-    redirectUrl = `${baseUrl}/already`;
-  } else if (verificationStatus === 'failed') {
-    redirectUrl = `${baseUrl}/failed`;
-  } else {
-    redirectUrl = `${baseUrl}/`;
+// api/verify.js
+export default async function handler(req, res) {
+  try {
+    // Enable CORS
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    
+    // Get ALL parameters from the URL
+    const { 
+      botHash,      // Random hash you generated in bot code
+      bot,          // Your bot's username
+      webhook_url,  // Webhook URL for callbacks
+      ...otherParams 
+    } = req.query;
+    
+    // Extract Telegram user data from the URL
+    const fullUrl = req.url;
+    const tgWebAppData = fullUrl.split('tgWebAppData=')[1]?.split('&')[0];
+    
+    // 🔐 YOUR VERIFICATION LOGIC GOES HERE
+    // This is where you decide which page to show
+    // Examples:
+    // - Check database if user exists
+    // - Validate the botHash
+    // - Check if user is banned
+    // - etc.
+    
+    let verificationStatus = 'success'; // Change based on your logic
+    
+    // Simple example logic:
+    const isFromTelegram = req.headers['user-agent']?.includes('Telegram') || tgWebAppData;
+    
+    if (!isFromTelegram) {
+      verificationStatus = 'failed';  // Not opened from Telegram
+    } else if (botHash === 'some_special_value') {
+      verificationStatus = 'already'; // Already verified
+    } else {
+      verificationStatus = 'success';  // New verification
+    }
+    
+    // Call the webhook URL if provided (asynchronous)
+    if (webhook_url) {
+      fetch(decodeURIComponent(webhook_url), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          verified: verificationStatus === 'success',
+          status: verificationStatus,
+          user: tgWebAppData,
+          botHash,
+          timestamp: Date.now()
+        })
+      }).catch(console.error);
+    }
+    
+    // Build redirect URL based on status
+    const baseUrl = `https://${req.headers.host}`;
+    let redirectPath;
+    
+    switch(verificationStatus) {
+      case 'success': redirectPath = '/success'; break;
+      case 'already': redirectPath = '/already'; break;
+      case 'failed': redirectPath = '/failed'; break;
+      default: redirectPath = '/';
+    }
+    
+    // Preserve all original parameters
+    const redirectUrl = new URL(redirectPath, baseUrl);
+    Object.entries(req.query).forEach(([key, value]) => {
+      redirectUrl.searchParams.append(key, value);
+    });
+    
+    // Send user to the appropriate page
+    res.redirect(302, redirectUrl.toString());
+    
+  } catch (error) {
+    console.error('Error:', error);
+    res.redirect(302, `https://${req.headers.host}/failed`);
   }
-  
-  // Add the original tgWebAppData to maintain user session
-  if (req.url.includes('tgWebAppData')) {
-    const params = new URLSearchParams(req.url.split('?')[1]);
-    redirectUrl += `?${params.toString()}`;
   }
-  
-  res.redirect(302, redirectUrl);
-      }
