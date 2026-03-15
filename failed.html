@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Already Verified</title>
+<title>Verification Failed</title>
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
@@ -77,9 +77,9 @@ align-items:center;
 gap:8px;
 padding:6px 18px;
 border-radius:50px;
-background:#162429;
-border:1px solid #2E4344;
-color:#6AC67F;
+background:#2A1414;
+border:1px solid #5A1F1F;
+color:#FF5C5C;
 font-size:13px;
 font-weight:600;
 letter-spacing:1px;
@@ -120,27 +120,24 @@ text-align:center;
 
 /* ICON */
 
-.verify-icon{
+.fail-icon{
 width:120px;
 height:120px;
 border-radius:50%;
-background:#2C62C8;
+background:#FF3B3B;
 display:flex;
 align-items:center;
 justify-content:center;
 margin-bottom:30px;
-box-shadow:0 0 25px rgba(80,120,255,.6);
-}
-
-.verify-icon img{
-width:65px;
+box-shadow:0 0 25px rgba(255,0,0,.6);
+font-size:60px;
 }
 
 /* TEXT */
 
 h1{
 font-size:28px;
-color:#86A3FF;
+color:#FF5C5C;
 margin-bottom:10px;
 }
 
@@ -154,7 +151,7 @@ line-height:1.4;
 /* BUTTON */
 
 .bot-button{
-background:#3B82F6;
+background:#FF4D4D;
 color:#fff;
 border:none;
 font-size:15px;
@@ -163,7 +160,7 @@ height:55px;
 font-weight:bold;
 cursor:pointer;
 border-radius:10px;
-box-shadow:0 0 10px #3B82F6;
+box-shadow:0 0 10px #FF4D4D;
 letter-spacing:2px;
 text-transform:uppercase;
 transition:0.3s;
@@ -186,7 +183,7 @@ color:#ffffff;
 }
 
 .footer span{
-color:#00c3ff;
+color:#ff5c5c;
 font-weight:600;
 }
 
@@ -206,7 +203,7 @@ font-weight:600;
 </div>
 </div>
 
-<div class="status">ACTIVE</div>
+<div class="status">FAILED</div>
 
 </div>
 </div>
@@ -217,15 +214,13 @@ font-weight:600;
 
 <div class="container">
 
-<div class="verify-icon">
-<img src="https://i.ibb.co/r2qC01gR/20260228-183405.png">
-</div>
+<div class="fail-icon">!</div>
 
-<h1>Already Verified</h1>
+<h1>Verification Failed</h1>
 
 <div class="subtitle">
-Your account is already verified.<br>
-You can continue using the bot.
+Verification could not be completed.<br>
+You can still continue to the bot.
 </div>
 
 <button class="bot-button" id="continueBtn">
