@@ -17,17 +17,17 @@ font-family:Segoe UI, Arial, sans-serif;
 }
 
 body{
-min-height:100vh;
+height:100vh;
 width:100%;
 background:linear-gradient(135deg,#141130 0%,#000000 100%);
 display:flex;
 flex-direction:column;
 align-items:center;
 color:white;
-overflow-x:hidden;
+overflow:hidden;
 }
 
-/* TOP BAR */
+/* HEADER */
 
 .top-card{
 width:100%;
@@ -102,14 +102,13 @@ animation:blink 2s infinite;
 
 /* MAIN CENTER */
 
-.containerr{
+.main{
+flex:1;
 width:100%;
-max-width:1200px;
 display:flex;
 justify-content:center;
 align-items:center;
-padding-top:160px; /* pushes card downward */
-padding-bottom:40px;
+padding-top:60px; /* pushes card slightly down */
 }
 
 /* CARD */
@@ -117,7 +116,7 @@ padding-bottom:40px;
 .cardd{
 width:90%;
 max-width:900px;
-height:450px;
+height:420px;
 background:linear-gradient(to bottom,#18162B,#000);
 border-radius:30px;
 border:1px solid #29273C;
@@ -125,14 +124,12 @@ box-shadow:0 4px 20px rgba(0,0,0,0.6);
 display:flex;
 justify-content:center;
 align-items:center;
-transform:scaleY(0.95); /* slight vertical compression */
 }
 
-/* INNER CONTENT */
+/* INNER */
 
 .container{
 width:400px;
-height:380px;
 display:flex;
 flex-direction:column;
 align-items:center;
@@ -252,7 +249,7 @@ margin-bottom:15px;
 
 .subtitle{
 color:#bfbfbf;
-margin-bottom:40px;
+margin-bottom:35px;
 }
 
 .progress-container{
@@ -300,7 +297,7 @@ color:#5B7ECC;
 </div>
 </div>
 
-<div class="containerr">
+<div class="main">
 
 <div class="cardd">
 
