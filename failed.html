@@ -1,349 +1,273 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=0.8, user-scalable=yes">  
-<title>Verification Failed</title>  
-  
-<script src="https://telegram.org/js/telegram-web-app.js"></script>  
-  
-<style>  
-*{  
-    margin:0;  
-    padding:0;  
-    box-sizing:border-box;  
-    font-family:Segoe UI, Arial, sans-serif;  
-}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Already Verified</title>
 
-/* ================= FIXED BACKGROUND ================= */  
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,Arial,sans-serif;
 }
 
-body{  
-    min-height: 100vh;
-    width: 100%;
-    background: linear-gradient(135deg, #141130 0%, #000000 100%);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display:flex;  
-    flex-direction: column;
-    justify-content:center;  
-    align-items:center;  
-    text-align:center;  
-    position: relative;
-}  
+body{
+height:100vh;
+width:100%;
+background:linear-gradient(135deg,#141130 0%,#000000 100%);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+color:#fff;
+overflow:hidden;
+}
 
-/* ================= ZOOM OUT STYLES ================= */  
-html {  
-    zoom: 0.9;  
-    -moz-transform: scale(0.9);  
-    -moz-transform-origin: 0 0;  
-    -o-transform: scale(0.9);  
-    -o-transform-origin: 0 0;  
-    -webkit-transform: scale(0.9);  
-    -webkit-transform-origin: 0 0;  
-}  
+/* HEADER */
 
-@media screen and (max-width: 768px) {  
-    html {  
-        zoom: 0.85;  
-        -webkit-transform: scale(0.85);  
-        transform: scale(0.85);  
-        transform-origin: 0 0;  
-    }  
-}  
+.top-card{
+width:100%;
+height:70px;
+background:#151422;
+border-bottom:1px solid #2f2c4a;
+display:flex;
+align-items:center;
+justify-content:center;
+position:fixed;
+top:0;
+left:0;
+z-index:1000;
+}
 
-.containerr {  
-    margin-top: 120px;
-    margin-bottom: 20px;
-    width: 100%;
-    max-width: 1200px;
-    display:flex;  
-    justify-content:center;  
-    align-items:center;
-    flex: 1;
-}  
+.top-bar{
+width:92%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
 
-.container {  
-    width: 100%;
-    display:flex;  
-    flex-direction:column;  
-    align-items:center;  
-}  
+.profile-left{
+display:flex;
+align-items:center;
+gap:12px;
+}
 
-.cardd {  
-    transform: scale(0.95);  
-    margin: 0 auto;  
-}  
+.profile-left img{
+width:40px;
+height:40px;
+border-radius:50%;
+object-fit:cover;
+background:#222;
+}
 
-.verify-wrapper {  
-    transform: scale(0.9);  
-    margin-bottom: 30px;  
-}  
+.user-info{
+display:flex;
+flex-direction:column;
+font-size:13px;
+}
 
-h1 {  
-    font-size: 150%;  
-    margin-bottom: 15px;  
-}  
+.status{
+display:flex;
+align-items:center;
+gap:8px;
+padding:6px 18px;
+border-radius:50px;
+background:#162429;
+border:1px solid #2E4344;
+color:#6AC67F;
+font-size:13px;
+font-weight:600;
+letter-spacing:1px;
+}
 
-.subtitle {  
-    font-size: 90%;  
-    margin-bottom: 30px;  
-}  
+/* MAIN */
 
-.bot-button {  
-    width: 320px;  
-    height: 60px;  
-    font-size: 15px;  
-    margin-top: 30px;  
-}  
+.main{
+flex:1;
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+padding-top:70px;
+}
 
-.top-card {  
-    height: auto;
-    min-height: 9%;
-    padding: 10px 15px;
-    background-color:#151422;  
-    border-bottom:1px solid #2f2c4a;  
-    position:fixed;  
-    top:0;  
-    left:0;  
-    right:0;  
-    display:flex;  
-    align-items:center;  
-    z-index:1000;  
-}  
+/* CARD */
 
-.profile-left img {  
-    width: 38px;  
-    height: 38px;  
-}  
+.cardd{
+width:720px;
+height:420px;
+background:linear-gradient(to bottom,#18162B,#000000);
+border-radius:28px;
+box-shadow:0 4px 20px rgba(0,0,0,0.6);
+border:1px solid #29273C;
+display:flex;
+justify-content:center;
+align-items:center;
+}
 
-.user-info {  
-    font-size: 12px;  
-}  
+.container{
+width:420px;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+}
 
-.status {  
-    padding: 4px 14px;  
-    font-size: 12px;  
-}  
+/* ICON */
 
-@media screen and (max-width: 480px) {  
-    html {  
-        zoom: 0.8;  
-        -webkit-transform: scale(0.8);  
-        transform: scale(0.8);  
-    }  
-    
-    body {
-        background: linear-gradient(135deg, #141130 0%, #000000 100%);
-        background-attachment: fixed;
-    }
-    
-    h1 {  
-        font-size: 130%;  
-    }  
-    
-    .bot-button {  
-        width: 280px;  
-        height: 55px;  
-        font-size: 14px;  
-    }  
-}  
+.verify-icon{
+width:120px;
+height:120px;
+border-radius:50%;
+background:#2C62C8;
+display:flex;
+align-items:center;
+justify-content:center;
+margin-bottom:30px;
+box-shadow:0 0 25px rgba(80,120,255,.6);
+}
 
-/* ================= ORIGINAL STYLES ================= */  
-.top-bar{  
-    width:100%;  
-    display:flex;  
-    justify-content:space-between;  
-    align-items:center;  
-}  
+.verify-icon img{
+width:65px;
+}
 
-.profile-left{  
-    display:flex;  
-    align-items:center;  
-    gap:12px;  
-}  
+/* TEXT */
 
-.profile-left img{  
-    width:45px;  
-    height:45px;  
-    border-radius:50%;  
-    object-fit:cover;  
-    background:#222;  
-}  
+h1{
+font-size:28px;
+color:#86A3FF;
+margin-bottom:10px;
+}
 
-.user-info{  
-    display:flex;  
-    flex-direction:column;  
-    font-size:13px;  
-    text-align:left;  
-    color:#fff;  
-}  
+.subtitle{
+font-size:14px;
+color:#bfbfbf;
+margin-bottom:30px;
+line-height:1.4;
+}
 
-.status{  
-    display:flex;  
-    align-items:center;  
-    gap:8px;  
-    padding:6px 18px;  
-    border-radius:50px;  
-    background:#2A1414;  
-    border:1px solid #5A1F1F;  
-    color:#FF5C5C;  
-    font-size:13px;  
-    font-weight:600;  
-    letter-spacing:1px;  
-}  
+/* BUTTON */
 
-.status::before{  
-    content:"";  
-    width:7px;  
-    height:7px;  
-    border-radius:50%;  
-    background:#FF3B3B;  
-}  
+.bot-button{
+background:#3B82F6;
+color:#fff;
+border:none;
+font-size:15px;
+width:260px;
+height:55px;
+font-weight:bold;
+cursor:pointer;
+border-radius:10px;
+box-shadow:0 0 10px #3B82F6;
+letter-spacing:2px;
+text-transform:uppercase;
+transition:0.3s;
+}
 
-.verify-wrapper{  
-    position:relative;  
-    width:260px;  
-    height:260px;  
-    margin-bottom:50px;  
-}  
+.bot-button:hover{
+transform:scale(1.05);
+}
 
-.verify-wrapper svg{  
-    position:absolute;  
-    top:50%;  
-    left:50%;  
-    transform:translate(-50%, -50%);  
-}  
+/* FOOTER */
 
-.outermost{ width:185px; height:185px;}  
-.outer{ width:165px; height:165px;}  
-.inner{ width:80px; height:80px;}  
+.footer{
+position:fixed;
+bottom:12px;
+left:50%;
+transform:translateX(-50%);
+font-size:13px;
+letter-spacing:1px;
+color:#ffffff;
+}
 
-.blur-dot{  
-    position:absolute;  
-    top:50%;  
-    left:50%;  
-    transform:translate(-50%, -50%);  
-    width:55px;  
-    height:55px;  
-    background:#ff2b2b;  
-    border-radius:50%;  
-    filter:blur(30px);  
-    opacity:0.9;  
-}  
+.footer span{
+color:#00c3ff;
+font-weight:600;
+}
 
-h1{  
-    font-size:200%;  
-    font-weight:600;  
-    color:#FF4D4D;  
-    margin-bottom:10px;  
-}  
+</style>
+</head>
 
-.subtitle{  
-    font-size:15px;  
-    color:#8F8F99;  
-    margin-bottom:10px;  
-}  
+<body>
 
-.bot-button{  
-    background-color:#FF4D4D;  
-    color:#FFFFFF;  
-    border:none;  
-    letter-spacing:2px;  
-    font-size:16px;  
-    width:350px;  
-    height:70px;  
-    font-weight:bold;  
-    cursor:pointer;  
-    border-radius:12px;  
-    box-shadow:0 0 15px rgba(255,0,0,0.6);  
-    text-transform:uppercase;  
-    margin-top:40px;  
-    transition:0.3s ease;  
-}  
+<div class="top-card">
+<div class="top-bar">
 
-.bot-button:hover{  
-    transform:scale(1.05);  
-}  
-</style>  
-</head>  
-  
-<body>  
-<div class="top-card">  
-    <div class="top-bar">  
-        <div class="profile-left">  
-            <img id="profilePic">  
-            <div class="user-info">  
-                <strong id="profileName"></strong>  
-                <small id="profileId"></small>  
-            </div>  
-        </div>  
-        <div class="status">ACTIVE</div>  
-    </div>  
-</div>  
-  
-<div class="containerr">  
-    <div class="container">  
-        <div class="verify-wrapper">  
-            <svg class="outermost" viewBox="0 0 400 400">  
-                <circle cx="200" cy="200" r="180"  
-                    fill="none"  
-                    stroke="#FF4D4D"  
-                    stroke-width="6"/>  
-            </svg>  
-            <svg class="outer" viewBox="0 0 400 400">  
-                <circle cx="200" cy="200" r="180"  
-                    fill="none"  
-                    stroke="#B33939"  
-                    stroke-width="4"/>  
-            </svg>  
-            <div class="blur-dot"></div>  
-            <svg class="inner" viewBox="0 0 100 100">  
-                <path  
-                    d="M50 12 L88 80 Q90 84 84 86 L16 86 Q10 84 12 80 Z"  
-                    fill="none"  
-                    stroke="#FF4D4D"  
-                    stroke-width="8"  
-                    stroke-linejoin="round"  
-                />  
-                <line x1="50" y1="40" x2="50" y2="60"  
-                    stroke="#FF4D4D"  
-                    stroke-width="8"  
-                    stroke-linecap="round"/>  
-                <circle cx="50" cy="74" r="5" fill="#FF4D4D"/>  
-            </svg>  
-        </div>  
-        <h1><b>Verification Failed</b></h1>  
-        <div class="subtitle">  
-            You can still continue to our Bot.  
-        </div>  
-        <button class="bot-button">CONTINUE TO BOT</button>  
-    </div>  
-</div>  
-  
-<script>  
-const tg = window.Telegram.WebApp;  
-tg.expand();  
-  
-const user = tg.initDataUnsafe?.user;  
-  
-if(user){  
-    document.getElementById("profileName").innerText =  
-        user.first_name + (user.last_name ? " " + user.last_name : "");  
-    document.getElementById("profileId").innerText =  
-        "ID: " + user.id;  
-  
-    if(user.photo_url){  
-        document.getElementById("profilePic").src = user.photo_url;  
-    }  
-}  
-</script>  
-</body>  
+<div class="profile-left">
+<img id="profilePic">
+<div class="user-info">
+<strong id="profileName"></strong>
+<small id="profileId"></small>
+</div>
+</div>
+
+<div class="status">ACTIVE</div>
+
+</div>
+</div>
+
+<div class="main">
+
+<div class="cardd">
+
+<div class="container">
+
+<div class="verify-icon">
+<img src="https://i.ibb.co/r2qC01gR/20260228-183405.png">
+</div>
+
+<h1>Already Verified</h1>
+
+<div class="subtitle">
+Your account is already verified.<br>
+You can continue using the bot.
+</div>
+
+<button class="bot-button" id="continueBtn">
+CONTINUE TO BOT
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+Powered by <span>ROHITxEGO</span>
+</div>
+
+<script>
+
+const tg = window.Telegram.WebApp
+tg.expand()
+
+const user = tg.initDataUnsafe?.user
+
+if(user){
+
+document.getElementById("profileName").innerText =
+user.first_name + (user.last_name ? " " + user.last_name : "")
+
+document.getElementById("profileId").innerText =
+"ID: " + user.id
+
+if(user.photo_url){
+document.getElementById("profilePic").src = user.photo_url
+}
+
+}
+
+document.getElementById("continueBtn").onclick = function(){
+tg.close()
+}
+
+</script>
+
+</body>
 </html>
