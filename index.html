@@ -108,7 +108,7 @@ width:100%;
 display:flex;
 justify-content:center;
 align-items:center;
-padding-top:60px;
+padding-top:70px;
 }
 
 /* CARD */
@@ -279,17 +279,32 @@ font-size:12px;
 color:#5B7ECC;
 }
 
-/* FOOTER */
+/* FOOTER BOTTOM */
 
 .footer{
-margin-top:15px;
-font-size:12px;
+position:fixed;
+bottom:12px;
+left:50%;
+transform:translateX(-50%);
+font-size:13px;
 color:#aaa;
+letter-spacing:1px;
 }
 
 .footer span{
 color:#00c3ff;
-font-weight:600;
+font-weight:700;
+text-shadow:0 0 5px #00c3ff,0 0 10px #00c3ff,0 0 20px #0088ff;
+animation:glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow{
+from{
+text-shadow:0 0 5px #00c3ff,0 0 10px #00c3ff;
+}
+to{
+text-shadow:0 0 10px #00c3ff,0 0 20px #00c3ff,0 0 35px #0088ff;
+}
 }
 
 </style>
@@ -364,14 +379,14 @@ Establishing secure handshake...
 <span id="percent">10%</span>
 </div>
 
+</div>
+
+</div>
+
+</div>
+
 <div class="footer">
 Powered by <span>ROHITxEGO</span>
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 <script>
