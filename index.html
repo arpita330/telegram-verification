@@ -1,502 +1,413 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=0.8, user-scalable=yes">  
-<title>Verifying Device</title>  
-  
-<script src="https://telegram.org/js/telegram-web-app.js"></script>  
-  
-<style>  
-*{  
-    margin:0;  
-    padding:0;  
-    box-sizing:border-box;  
-    font-family:Segoe UI, Arial, sans-serif;  
-}  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verifying Device</title>
 
-/* ================= FIXED BACKGROUND ================= */  
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI, Arial, sans-serif;
 }
 
-body{  
-    min-height: 100vh;
-    width: 100%;
-    background: linear-gradient(135deg, #141130 0%, #000000 100%);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display:flex;  
-    flex-direction: column;
-    justify-content:center;  
-    align-items:center;  
-    text-align:center;  
-    color:#fff;  
-    position: relative;
-}  
-
-/* ================= ZOOM OUT STYLES ================= */  
-html {  
-    zoom: 0.9;  
-    -moz-transform: scale(0.9);  
-    -moz-transform-origin: 0 0;  
-    -o-transform: scale(0.9);  
-    -o-transform-origin: 0 0;  
-    -webkit-transform: scale(0.9);  
-    -webkit-transform-origin: 0 0;  
-}  
-
-@media screen and (max-width: 768px) {  
-    html {  
-        zoom: 0.85;  
-        -webkit-transform: scale(0.85);  
-        transform: scale(0.85);  
-        transform-origin: 0 0;  
-    }  
-}  
-
-/* Adjust container for zoom */  
-.containerr {  
-    margin-top: 120px;
-    margin-bottom: 20px;
-    margin-left: 20px; /* Shift right */
-    width: 100%;
-    max-width: 1200px;
-    display:flex;  
-    justify-content:center;  
-    align-items:center;
-    flex: 1;
-}  
-
-.cardd {  
-    transform: scale(0.95);  
-    margin: 0 auto;  
-}  
-
-.scanner-wrapper {  
-    transform: scale(0.9);  
-    margin-bottom: 30px;  
-}  
-
-h1 {  
-    font-size: 150%;  
-    margin-bottom: 15px;  
-}  
-
-.subtitle {  
-    font-size: 90%;  
-    margin-bottom: 40px;  
-}  
-
-.progress-container {  
-    width: 75%;  
-}  
-
-.progress-text {  
-    width: 75%;  
-    font-size: 65%;  
-}  
-
-/* Top card adjustment - shift status right */  
-.top-card {  
-    height: auto;
-    min-height: 9%;
-    padding: 10px 15px;
-    padding-right: 50px; /* Add right padding */
-    background-color:#151422;  
-    border-bottom:1px solid #2f2c4a;  
-    position:fixed;  
-    top:0;  
-    left:0;  
-    right:0;  
-    display:flex;  
-    align-items:center;  
-    z-index:1000;  
-}  
-
-.top-bar {
-    width:100%;  
-    display:flex;  
-    justify-content:space-between;  
-    align-items:center;
-    padding-right: 20px; /* Additional right padding */
+body{
+min-height:100vh;
+width:100%;
+background:linear-gradient(135deg,#141130 0%,#000000 100%);
+display:flex;
+flex-direction:column;
+align-items:center;
+color:white;
+overflow-x:hidden;
 }
 
-.profile-left {  
-    display:flex;  
-    align-items:center;  
-    gap:12px;  
-    margin-left: 10px; /* Shift profile slightly right */
-}  
+/* TOP HEADER */
 
-.profile-left img {  
-    width: 38px;  
-    height: 38px;  
-}  
+.top-card{
+width:100%;
+height:70px;
+background:#151422;
+border-bottom:1px solid #2f2c4a;
+display:flex;
+align-items:center;
+justify-content:center;
+position:fixed;
+top:0;
+left:0;
+z-index:1000;
+}
 
-.user-info {  
-    font-size: 12px;  
-}  
+.top-bar{
+width:95%;
+max-width:1200px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
 
-.status {  
-    padding: 4px 14px;  
-    font-size: 12px;
-    margin-right: 20px; /* Shift status right */
-}  
+.profile-left{
+display:flex;
+align-items:center;
+gap:12px;
+}
 
-@media screen and (max-width: 480px) {  
-    html {  
-        zoom: 0.8;  
-        -webkit-transform: scale(0.8);  
-        transform: scale(0.8);  
-    }  
-    
-    body {
-        background: linear-gradient(135deg, #141130 0%, #000000 100%);
-        background-attachment: fixed;
-    }
-    
-    h1 {  
-        font-size: 130%;  
-    }  
-    
-    .containerr {
-        margin-left: 15px;
-    }
-    
-    .status {
-        margin-right: 15px;
-    }
-}  
+.profile-left img{
+width:40px;
+height:40px;
+border-radius:50%;
+background:#222;
+object-fit:cover;
+}
 
-/* ================= ORIGINAL STYLES ================= */  
-.top-bar{  
-    width:100%;  
-    display:flex;  
-    justify-content:space-between;  
-    align-items:center;  
-}  
+.user-info{
+display:flex;
+flex-direction:column;
+font-size:13px;
+}
 
-.profile-left{  
-    display:flex;  
-    align-items:center;  
-    gap:12px;  
-}  
+.status{
+display:flex;
+align-items:center;
+gap:8px;
+padding:6px 18px;
+border-radius:50px;
+background:#171D3D;
+border:1px solid #333A54;
+color:#86A3D8;
+font-size:13px;
+font-weight:600;
+letter-spacing:1px;
+}
 
-.profile-left img{  
-    width:45px;  
-    height:45px;  
-    border-radius:50%;  
-    object-fit:cover;  
-    background:#222;  
-}  
+.status::before{
+content:"";
+width:7px;
+height:7px;
+border-radius:50%;
+background:#2C62C8;
+animation:blink 2s infinite;
+}
 
-.user-info{  
-    display:flex;  
-    flex-direction:column;  
-    font-size:13px;  
-    text-align:left;  
-}  
+@keyframes blink{
+0%{opacity:1}
+50%{opacity:.3}
+100%{opacity:1}
+}
 
-.status{  
-    display:flex;  
-    align-items:center;  
-    gap:8px;  
-    padding:6px 18px;  
-    border-radius:50px;  
-    background:#171D3D;  
-    border:1px solid #333A54;  
-    color:#86A3D8;  
-    font-size:13px;  
-    font-weight:600;  
-    letter-spacing:1px;  
-}  
+/* CENTER AREA */
 
-.status::before{  
-    content:"";  
-    width:7px;  
-    height:7px;  
-    border-radius:50%;  
-    background:#2C62C8;  
-    animation: softBlink 2.5s infinite ease-in-out;  
-}  
+.containerr{
+width:100%;
+max-width:1200px;
+display:flex;
+justify-content:center;
+align-items:center;
+padding-top:120px;
+}
 
-@keyframes softBlink{  
-    0%{opacity:1;}  
-    50%{opacity:0.3;}  
-    100%{opacity:1;}  
-}  
+/* CARD */
 
-.cardd{  
-    width:900px;  
-    height:450px;  
-    background: linear-gradient(to bottom, #18162B, #000000);  
-    border-radius:30px;  
-    box-shadow:0 4px 20px rgba(0,0,0,0.6);  
-    display:flex;  
-    border:1px solid #29273C;  
-    justify-content:center;  
-    align-items:center;  
-}  
+.cardd{
+width:90%;
+max-width:900px;
+height:450px;
+background:linear-gradient(to bottom,#18162B,#000);
+border-radius:30px;
+border:1px solid #29273C;
+box-shadow:0 4px 20px rgba(0,0,0,0.6);
+display:flex;
+justify-content:center;
+align-items:center;
+}
 
-.container{  
-    width:400px;  
-    height:380px;  
-    display:flex;  
-    flex-direction:column;  
-    align-items:center;  
-}  
+/* INNER CONTAINER */
 
-.scanner-wrapper{  
-    margin-bottom:40px;  
-}  
+.container{
+width:400px;
+height:380px;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
 
-.outer-circle{  
-    position:relative;  
-    width:140px;  
-    height:140px;  
-    border-radius:50%;  
-    border:5px solid #455F97;  
-    display:flex;  
-    justify-content:center;  
-    align-items:center;  
-    box-shadow:0 0 25px rgba(42,70,128,0.6);  
-    overflow:hidden;  
-}  
+/* SCANNER */
 
-.outer-rotation{  
-    position:absolute;  
-    width:100%;  
-    height:100%;  
-    border-radius:50%;  
-    animation:rotateClockwise 6s linear infinite;  
-}  
+.scanner-wrapper{
+margin-bottom:40px;
+}
 
-.outer-dot{  
-    position:absolute;  
-    width:5px;  
-    height:7px;  
-    background:#2A4680;  
-    border-radius:50%;  
-}  
+.outer-circle{
+position:relative;
+width:140px;
+height:140px;
+border-radius:50%;
+border:5px solid #455F97;
+display:flex;
+justify-content:center;
+align-items:center;
+box-shadow:0 0 25px rgba(42,70,128,0.6);
+overflow:hidden;
+}
 
-.outer-dot:nth-child(1){ top:-5px; left:50%; transform:translateX(-50%); }  
-.outer-dot:nth-child(2){ top:50%; right:-5px; transform:translateY(-50%); }  
-.outer-dot:nth-child(3){ bottom:-5px; left:50%; transform:translateX(-50%); }  
-.outer-dot:nth-child(4){ top:50%; left:-5px; transform:translateY(-50%); }  
+.outer-rotation{
+position:absolute;
+width:100%;
+height:100%;
+border-radius:50%;
+animation:rotateClockwise 6s linear infinite;
+}
 
-.inner-circle{  
-    position:relative;  
-    width:120px;  
-    height:120px;  
-    border-radius:50%;  
-    border:4px solid #344779;  
-    box-shadow:0 0 20px rgba(42,70,128,0.4) inset;  
-    display:flex;  
-    justify-content:center;  
-    align-items:center;  
-}  
+.outer-dot{
+position:absolute;
+width:5px;
+height:7px;
+background:#2A4680;
+border-radius:50%;
+}
 
-.inner-rotation{  
-    position:absolute;  
-    width:100%;  
-    height:100%;  
-    border-radius:50%;  
-    animation:rotateCounter 6s linear infinite;  
-}  
+.outer-dot:nth-child(1){top:-5px;left:50%;transform:translateX(-50%)}
+.outer-dot:nth-child(2){top:50%;right:-5px;transform:translateY(-50%)}
+.outer-dot:nth-child(3){bottom:-5px;left:50%;transform:translateX(-50%)}
+.outer-dot:nth-child(4){top:50%;left:-5px;transform:translateY(-50%)}
 
-.inner-dot{  
-    position:absolute;  
-    width:5px;  
-    height:5px;  
-    background:#344779;  
-    border-radius:50%;  
-}  
+.inner-circle{
+position:relative;
+width:120px;
+height:120px;
+border-radius:50%;
+border:4px solid #344779;
+display:flex;
+justify-content:center;
+align-items:center;
+box-shadow:0 0 20px rgba(42,70,128,0.4) inset;
+}
 
-.inner-dot:nth-child(1){ top:-4px; left:50%; transform:translateX(-50%); }  
-.inner-dot:nth-child(2){ top:50%; right:-4px; transform:translateY(-50%); }  
-.inner-dot:nth-child(3){ bottom:-4px; left:50%; transform:translateX(-50%); }  
-.inner-dot:nth-child(4){ top:50%; left:-4px; transform:translateY(-50%); }  
+.inner-rotation{
+position:absolute;
+width:100%;
+height:100%;
+border-radius:50%;
+animation:rotateCounter 6s linear infinite;
+}
 
-.scan-image{  
-    width:60px;  
-    height:60px;  
-    border-radius:15px;  
-    z-index:2;  
-}  
+.inner-dot{
+position:absolute;
+width:5px;
+height:5px;
+background:#344779;
+border-radius:50%;
+}
 
-.scan{  
-    position:absolute;  
-    width:100%;  
-    height:180px;  
-    top:-180px;  
-    background:linear-gradient(  
-        to bottom,  
-        transparent 0%,  
-        rgba(42,70,128,0.6) 35%,  
-        rgba(42,70,128,1) 50%,  
-        rgba(42,70,128,0.6) 65%,  
-        transparent 100%  
-    );  
-    mix-blend-mode:screen;  
-    filter:blur(15px);  
-    animation:scanMove 2s linear infinite;  
-    z-index:5;  
-    pointer-events:none;  
-}  
+.inner-dot:nth-child(1){top:-4px;left:50%;transform:translateX(-50%)}
+.inner-dot:nth-child(2){top:50%;right:-4px;transform:translateY(-50%)}
+.inner-dot:nth-child(3){bottom:-4px;left:50%;transform:translateX(-50%)}
+.inner-dot:nth-child(4){top:50%;left:-4px;transform:translateY(-50%)}
 
-@keyframes scanMove{  
-    0%{top:-180px;}  
-    100%{top:100%;}  
-}  
+.scan-image{
+width:60px;
+height:60px;
+border-radius:15px;
+z-index:2;
+}
 
-@keyframes rotateClockwise{  
-    from{transform:rotate(0deg);}  
-    to{transform:rotate(360deg);}  
-}  
+.scan{
+position:absolute;
+width:100%;
+height:180px;
+top:-180px;
+background:linear-gradient(to bottom,transparent,rgba(42,70,128,.8),transparent);
+filter:blur(15px);
+animation:scanMove 2s linear infinite;
+}
 
-@keyframes rotateCounter{  
-    from{transform:rotate(360deg);}  
-    to{transform:rotate(0deg);}  
-}  
+@keyframes scanMove{
+0%{top:-180px}
+100%{top:100%}
+}
 
-h1{  
-    font-size:170%;  
-    font-weight:600;  
-    margin-bottom:20px;  
-}  
+@keyframes rotateClockwise{
+from{transform:rotate(0)}
+to{transform:rotate(360deg)}
+}
 
-.subtitle{  
-    font-size:100%;  
-    color:#bfbfbf;  
-    margin-bottom:60px;  
-}  
+@keyframes rotateCounter{
+from{transform:rotate(360deg)}
+to{transform:rotate(0)}
+}
 
-.progress-container{  
-    width:85%;  
-    background:#444;  
-    height:5px;  
-    border-radius:5px;  
-    overflow:hidden;  
-}  
+/* TEXT */
 
-.progress-bar{  
-    height:100%;  
-    width:10%;  
-    background:#4080EC;  
-    transition:width 1s ease;  
-}  
+h1{
+font-size:28px;
+margin-bottom:15px;
+}
 
-.progress-text{  
-    display:flex;  
-    justify-content:space-between;  
-    width:85%;  
-    margin-top:3%;  
-    font-size:70%;  
-    color:#5B7ECC;  
-}  
-</style>  
-</head>  
-  
-<body>  
-<div class="top-card">  
-    <div class="top-bar">  
-        <div class="profile-left">  
-            <img id="profilePic">  
-            <div class="user-info">  
-                <strong id="profileName"></strong>  
-                <small id="profileId"></small>  
-            </div>  
-        </div>  
-        <div class="status">SCANNING</div>  
-    </div>  
-</div>  
-  
-<div class="containerr">  
-    <div class="cardd">  
-        <div class="container">  
-            <div class="scanner-wrapper">  
-                <div class="outer-circle">  
-                    <div class="outer-rotation">  
-                        <div class="outer-dot"></div>  
-                        <div class="outer-dot"></div>  
-                        <div class="outer-dot"></div>  
-                        <div class="outer-dot"></div>  
-                    </div>  
-                    <div class="inner-circle">  
-                        <div class="inner-rotation">  
-                            <div class="inner-dot"></div>  
-                            <div class="inner-dot"></div>  
-                            <div class="inner-dot"></div>  
-                            <div class="inner-dot"></div>  
-                        </div>  
-                        <img src="https://i.ibb.co/20z9rTwJ/20260227-005438.png" class="scan-image">  
-                    </div>  
-                    <div class="scan"></div>  
-                </div>  
-            </div>  
-            <h1>Verifying Device</h1>  
-            <div class="subtitle" id="statusText">  
-                Establishing secure handshake...  
-            </div>  
-            <div class="progress-container">  
-                <div class="progress-bar" id="progressBar"></div>  
-            </div>  
-            <div class="progress-text">  
-                <span>ANALYSIS IN PROGRESS</span>  
-                <span id="percent">10%</span>  
-            </div>  
-        </div>  
-    </div>  
-</div>  
-  
-<script>  
-const tg = window.Telegram.WebApp;  
-tg.expand();  
-  
-const user = tg.initDataUnsafe?.user;  
-  
-if(user){  
-    document.getElementById("profileName").innerText =  
-        user.first_name + (user.last_name ? " " + user.last_name : "");  
-    document.getElementById("profileId").innerText =  
-        "ID: " + user.id;  
-  
-    if(user.photo_url){  
-        document.getElementById("profilePic").src = user.photo_url;  
-    }  
-}  
-  
-let bar = document.getElementById("progressBar");  
-let percent = document.getElementById("percent");  
-let statusText = document.getElementById("statusText");  
-  
-let steps = [  
-    {value:10, text:"Establishing secure handshake..."},  
-    {value:60, text:"Analyzing device integrity..."},  
-    {value:90, text:"Final security checks..."},  
-    {value:100, text:"Verification Complete"}  
-];  
-  
-let index = 0;  
-  
-function updateProgress(){  
-    if(index < steps.length){  
-        let step = steps[index];  
-        bar.style.width = step.value + "%";  
-        percent.innerHTML = step.value + "%";  
-        statusText.innerHTML = step.text;  
-        index++;  
-        setTimeout(updateProgress, 1500);  
-    }  
-}  
-  
-updateProgress();  
-</script>  
-</body>  
+.subtitle{
+color:#bfbfbf;
+margin-bottom:40px;
+}
+
+.progress-container{
+width:85%;
+background:#444;
+height:5px;
+border-radius:5px;
+overflow:hidden;
+}
+
+.progress-bar{
+height:100%;
+width:10%;
+background:#4080EC;
+transition:width 1s;
+}
+
+.progress-text{
+display:flex;
+justify-content:space-between;
+width:85%;
+margin-top:10px;
+font-size:12px;
+color:#5B7ECC;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="top-card">
+<div class="top-bar">
+
+<div class="profile-left">
+<img id="profilePic">
+<div class="user-info">
+<strong id="profileName"></strong>
+<small id="profileId"></small>
+</div>
+</div>
+
+<div class="status">SCANNING</div>
+
+</div>
+</div>
+
+<div class="containerr">
+<div class="cardd">
+
+<div class="container">
+
+<div class="scanner-wrapper">
+
+<div class="outer-circle">
+
+<div class="outer-rotation">
+<div class="outer-dot"></div>
+<div class="outer-dot"></div>
+<div class="outer-dot"></div>
+<div class="outer-dot"></div>
+</div>
+
+<div class="inner-circle">
+
+<div class="inner-rotation">
+<div class="inner-dot"></div>
+<div class="inner-dot"></div>
+<div class="inner-dot"></div>
+<div class="inner-dot"></div>
+</div>
+
+<img src="https://i.ibb.co/20z9rTwJ/20260227-005438.png" class="scan-image">
+
+</div>
+
+<div class="scan"></div>
+
+</div>
+
+</div>
+
+<h1>Verifying Device</h1>
+
+<div class="subtitle" id="statusText">
+Establishing secure handshake...
+</div>
+
+<div class="progress-container">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+
+<div class="progress-text">
+<span>ANALYSIS IN PROGRESS</span>
+<span id="percent">10%</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<script>
+
+const tg = window.Telegram.WebApp
+tg.expand()
+
+const user = tg.initDataUnsafe?.user
+
+if(user){
+
+document.getElementById("profileName").innerText =
+user.first_name + (user.last_name ? " " + user.last_name : "")
+
+document.getElementById("profileId").innerText =
+"ID: " + user.id
+
+if(user.photo_url){
+document.getElementById("profilePic").src = user.photo_url
+}
+
+}
+
+let bar=document.getElementById("progressBar")
+let percent=document.getElementById("percent")
+let statusText=document.getElementById("statusText")
+
+let steps=[
+{value:10,text:"Establishing secure handshake..."},
+{value:60,text:"Analyzing device integrity..."},
+{value:90,text:"Final security checks..."},
+{value:100,text:"Verification Complete"}
+]
+
+let i=0
+
+function updateProgress(){
+
+if(i<steps.length){
+
+let step=steps[i]
+
+bar.style.width=step.value+"%"
+percent.innerHTML=step.value+"%"
+statusText.innerHTML=step.text
+
+i++
+
+setTimeout(updateProgress,1500)
+
+}
+
+}
+
+updateProgress()
+
+</script>
+
+</body>
 </html>
