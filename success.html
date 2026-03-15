@@ -282,7 +282,7 @@ You're verified successfully.<br>
 You can now use our bot.
 </div>
 
-<button class="bot-button">
+<button class="bot-button" id="continueBtn">
 CONTINUE TO BOT
 </button>
 
@@ -316,6 +316,14 @@ document.getElementById("profilePic").src = user.photo_url
 }
 
 }
+
+/* CLOSE WEBAPP WHEN BUTTON CLICKED */
+
+document.getElementById("continueBtn").addEventListener("click", function(){
+
+tg.close()
+
+})
 
 </script>
 
