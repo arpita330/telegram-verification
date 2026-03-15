@@ -64,6 +64,7 @@ html {
 .containerr {  
     margin-top: 120px;
     margin-bottom: 20px;
+    margin-left: 20px; /* Shift right */
     width: 100%;
     max-width: 1200px;
     display:flex;  
@@ -101,11 +102,12 @@ h1 {
     font-size: 65%;  
 }  
 
-/* Top card adjustment */  
+/* Top card adjustment - shift status right */  
 .top-card {  
     height: auto;
     min-height: 9%;
     padding: 10px 15px;
+    padding-right: 30px; /* Add right padding */
     background-color:#151422;  
     border-bottom:1px solid #2f2c4a;  
     position:fixed;  
@@ -115,6 +117,21 @@ h1 {
     display:flex;  
     align-items:center;  
     z-index:1000;  
+}  
+
+.top-bar {
+    width:100%;  
+    display:flex;  
+    justify-content:space-between;  
+    align-items:center;
+    padding-right: 20px; /* Additional right padding */
+}
+
+.profile-left {  
+    display:flex;  
+    align-items:center;  
+    gap:12px;  
+    margin-left: 10px; /* Shift profile slightly right */
 }  
 
 .profile-left img {  
@@ -128,7 +145,8 @@ h1 {
 
 .status {  
     padding: 4px 14px;  
-    font-size: 12px;  
+    font-size: 12px;
+    margin-right: 20px; /* Shift status right */
 }  
 
 @media screen and (max-width: 480px) {  
@@ -146,6 +164,14 @@ h1 {
     h1 {  
         font-size: 130%;  
     }  
+    
+    .containerr {
+        margin-left: 15px;
+    }
+    
+    .status {
+        margin-right: 15px;
+    }
 }  
 
 /* ================= ORIGINAL STYLES ================= */  
