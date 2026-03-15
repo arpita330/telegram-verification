@@ -13,7 +13,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Segoe UI, Arial, sans-serif;
+font-family:Segoe UI,Arial,sans-serif;
 }
 
 body{
@@ -23,7 +23,8 @@ background:linear-gradient(135deg,#141130 0%,#000000 100%);
 display:flex;
 flex-direction:column;
 align-items:center;
-color:white;
+justify-content:center;
+color:#fff;
 overflow:hidden;
 }
 
@@ -44,8 +45,7 @@ z-index:1000;
 }
 
 .top-bar{
-width:95%;
-max-width:1200px;
+width:92%;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -61,8 +61,8 @@ gap:12px;
 width:40px;
 height:40px;
 border-radius:50%;
-background:#222;
 object-fit:cover;
+background:#222;
 }
 
 .user-info{
@@ -100,7 +100,7 @@ animation:blink 2s infinite;
 100%{opacity:1}
 }
 
-/* MAIN */
+/* MAIN AREA */
 
 .main{
 flex:1;
@@ -114,19 +114,18 @@ padding-top:70px;
 /* CARD */
 
 .cardd{
-width:85%;
-max-width:780px;
-height:380px;
-background:linear-gradient(to bottom,#18162B,#000);
+width:720px;
+height:360px;
+background:linear-gradient(to bottom,#18162B,#000000);
 border-radius:28px;
-border:1px solid #29273C;
 box-shadow:0 4px 20px rgba(0,0,0,0.6);
+border:1px solid #29273C;
 display:flex;
 justify-content:center;
 align-items:center;
 }
 
-/* INNER */
+/* CONTENT */
 
 .container{
 width:360px;
@@ -134,14 +133,13 @@ display:flex;
 flex-direction:column;
 align-items:center;
 justify-content:center;
-gap:10px;
 }
 
 /* SCANNER */
 
 .scanner-wrapper{
-margin-bottom:15px;
-margin-top:-20px;
+margin-bottom:20px;
+margin-top:-15px;
 }
 
 .outer-circle{
@@ -247,10 +245,11 @@ to{transform:rotate(0)}
 
 h1{
 font-size:26px;
-margin-bottom:5px;
+margin-bottom:6px;
 }
 
 .subtitle{
+font-size:14px;
 color:#bfbfbf;
 margin-bottom:20px;
 }
@@ -279,7 +278,7 @@ font-size:12px;
 color:#5B7ECC;
 }
 
-/* FOOTER BOTTOM */
+/* FOOTER */
 
 .footer{
 position:fixed;
@@ -287,11 +286,14 @@ bottom:12px;
 left:50%;
 transform:translateX(-50%);
 font-size:13px;
-color:#aaa;
 letter-spacing:1px;
 }
 
-.footer span{
+#poweredText{
+color:#ffffff;
+}
+
+#brandText{
 color:#00c3ff;
 font-weight:700;
 text-shadow:0 0 5px #00c3ff,0 0 10px #00c3ff,0 0 20px #0088ff;
@@ -386,7 +388,7 @@ Establishing secure handshake...
 </div>
 
 <div class="footer">
-Powered by <span>ROHITxEGO</span>
+<span id="poweredText"></span><span id="brandText"></span>
 </div>
 
 <script>
@@ -442,6 +444,46 @@ setTimeout(updateProgress,1500)
 }
 
 updateProgress()
+
+/* FOOTER TYPING */
+
+const powered="Powered by "
+const brand="ROHITxEGO"
+
+let p=0
+let b=0
+
+function typePowered(){
+
+if(p<powered.length){
+
+document.getElementById("poweredText").innerHTML+=powered.charAt(p)
+p++
+
+setTimeout(typePowered,60)
+
+}else{
+
+typeBrand()
+
+}
+
+}
+
+function typeBrand(){
+
+if(b<brand.length){
+
+document.getElementById("brandText").innerHTML+=brand.charAt(b)
+b++
+
+setTimeout(typeBrand,120)
+
+}
+
+}
+
+typePowered()
 
 </script>
 
