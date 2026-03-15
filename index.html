@@ -125,14 +125,11 @@ justify-content:center;
 align-items:center;
 }
 
-/* CONTENT */
-
 .container{
 width:360px;
 display:flex;
 flex-direction:column;
 align-items:center;
-justify-content:center;
 }
 
 /* SCANNER */
@@ -287,26 +284,12 @@ left:50%;
 transform:translateX(-50%);
 font-size:13px;
 letter-spacing:1px;
-}
-
-#poweredText{
 color:#ffffff;
 }
 
-#brandText{
+.footer span{
 color:#00c3ff;
-font-weight:700;
-text-shadow:0 0 5px #00c3ff,0 0 10px #00c3ff,0 0 20px #0088ff;
-animation:glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow{
-from{
-text-shadow:0 0 5px #00c3ff,0 0 10px #00c3ff;
-}
-to{
-text-shadow:0 0 10px #00c3ff,0 0 20px #00c3ff,0 0 35px #0088ff;
-}
+font-weight:600;
 }
 
 </style>
@@ -388,7 +371,7 @@ Establishing secure handshake...
 </div>
 
 <div class="footer">
-<span id="poweredText"></span><span id="brandText"></span>
+Powered by <span>RohitXEgo</span>
 </div>
 
 <script>
@@ -444,46 +427,6 @@ setTimeout(updateProgress,1500)
 }
 
 updateProgress()
-
-/* FOOTER TYPING */
-
-const powered="Powered by "
-const brand="ROHITxEGO"
-
-let p=0
-let b=0
-
-function typePowered(){
-
-if(p<powered.length){
-
-document.getElementById("poweredText").innerHTML+=powered.charAt(p)
-p++
-
-setTimeout(typePowered,60)
-
-}else{
-
-typeBrand()
-
-}
-
-}
-
-function typeBrand(){
-
-if(b<brand.length){
-
-document.getElementById("brandText").innerHTML+=brand.charAt(b)
-b++
-
-setTimeout(typeBrand,120)
-
-}
-
-}
-
-typePowered()
 
 </script>
 
