@@ -1,470 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=0.8, user-scalable=yes">
-    <title>Verification Successful</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verification Successful</title>
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-    <style>
-        /* ===== RESET & BASE ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
+<style>
 
-        html, body {
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,Arial,sans-serif;
+}
 
-        body {
-            min-height: 100vh;
-            width: 100%;
-            background: linear-gradient(135deg, #141130 0%, #000000 100%);
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            color: #fff;
-        }
+body{
+height:100vh;
+width:100%;
+background:linear-gradient(135deg,#141130 0%,#000000 100%);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+color:#fff;
+overflow:hidden;
+}
 
-        /* ===== ZOOM OUT EFFECT (like original) ===== */
-        html {
-            zoom: 0.9;
-            -moz-transform: scale(0.9);
-            -moz-transform-origin: 0 0;
-            -o-transform: scale(0.9);
-            -o-transform-origin: 0 0;
-            -webkit-transform: scale(0.9);
-            -webkit-transform-origin: 0 0;
-        }
+/* HEADER */
 
-        @media screen and (max-width: 768px) {
-            html {
-                zoom: 0.85;
-                -webkit-transform: scale(0.85);
-                transform: scale(0.85);
-                transform-origin: 0 0;
-            }
-        }
+.top-card{
+width:100%;
+height:70px;
+background:#151422;
+border-bottom:1px solid #2f2c4a;
+display:flex;
+align-items:center;
+justify-content:center;
+position:fixed;
+top:0;
+left:0;
+z-index:1000;
+}
 
-        @media screen and (max-width: 480px) {
-            html {
-                zoom: 0.8;
-                -webkit-transform: scale(0.8);
-                transform: scale(0.8);
-            }
-            body {
-                background: linear-gradient(135deg, #141130 0%, #000000 100%);
-                background-attachment: fixed;
-            }
-            h1 {
-                font-size: 130% !important;
-            }
-            .bot-button {
-                width: 280px !important;
-                height: 55px !important;
-                font-size: 14px !important;
-            }
-        }
+.top-bar{
+width:92%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
 
-        /* ===== TOP CARD (fixed header) ===== */
-        .top-card {
-            width: 100%;
-            background-color: #151422;
-            border-bottom: 1px solid #2f2c4a;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-            z-index: 1000;
-            height: auto;
-            min-height: 70px;
-            padding: 8px 16px;
-        }
+.profile-left{
+display:flex;
+align-items:center;
+gap:12px;
+}
 
-        .top-bar {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.profile-left img{
+width:40px;
+height:40px;
+border-radius:50%;
+object-fit:cover;
+background:#222;
+}
 
-        .profile-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+.user-info{
+display:flex;
+flex-direction:column;
+font-size:13px;
+}
 
-        .profile-left img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #222;
-            border: 1px solid #3a3a5a;
-        }
+.status{
+display:flex;
+align-items:center;
+gap:8px;
+padding:6px 18px;
+border-radius:50px;
+background:#162429;
+border:1px solid #2E4344;
+color:#6AC67F;
+font-size:13px;
+font-weight:600;
+letter-spacing:1px;
+}
 
-        .user-info {
-            display: flex;
-            flex-direction: column;
-            font-size: 13px;
-            text-align: left;
-        }
+.status::before{
+content:"";
+width:7px;
+height:7px;
+border-radius:50%;
+background:#1EC764;
+animation:blink 2s infinite;
+}
 
-        .user-info strong {
-            font-weight: 600;
-            color: white;
-        }
+@keyframes blink{
+0%{opacity:1}
+50%{opacity:.3}
+100%{opacity:1}
+}
 
-        .user-info small {
-            color: #a0a0c0;
-            font-size: 11px;
-        }
+/* MAIN AREA */
 
-        .status {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 18px;
-            border-radius: 50px;
-            background: #162429;
-            border: 1px solid #2E4344;
-            color: #6AC67F;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
+.main{
+flex:1;
+width:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+padding-top:70px;
+}
 
-        .status::before {
-            content: "";
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #1EC764;
-            animation: softBlink 2.5s infinite ease-in-out;
-        }
+/* CARD */
 
-        @keyframes softBlink {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
+.cardd{
+width:720px;
+height:420px;
+background:linear-gradient(to bottom,#1A1830,#060606);
+border-radius:28px;
+box-shadow:0 4px 20px rgba(0,0,0,0.6);
+border:1px solid #1F1E26;
+display:flex;
+justify-content:center;
+align-items:center;
+}
 
-        /* ===== MAIN CONTAINER ===== */
-        .containerr {
-            margin-top: 90px;   /* space for fixed header */
-            margin-bottom: 20px;
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex: 1;
-        }
+.container{
+width:420px;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+}
 
-        /* ===== CARD (exactly matching original style but adjusted) ===== */
-        .cardd {
-            width: 500px;
-            height: 600px;
-            background: linear-gradient(to bottom, #1A1830, #060606);
-            border-radius: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-            display: flex;
-            border: 1px solid #1F1E26;
-            justify-content: center;
-            align-items: center;
-            transform: scale(0.95);
-            margin: 0 auto;
-        }
+/* SUCCESS ICON */
 
-        .container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 20px;
-        }
+.verify-wrapper{
+position:relative;
+width:220px;
+height:220px;
+margin-bottom:35px;
+}
 
-        /* ===== VERIFY WRAPPER (SVG + GLOW) ===== */
-        .verify-wrapper {
-            position: relative;
-            width: 260px;
-            height: 260px;
-            margin-bottom: 50px;
-            transform: scale(0.9);
-        }
+.verify-wrapper svg,
+.glow-layer{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+}
 
-        .verify-wrapper svg,
-        .glow-layer {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
+.outermost{width:200px;height:200px;}
+.outer{width:170px;height:170px;}
+.inner{width:90px;height:90px;}
 
-        .outermost {
-            width: 235px;
-            height: 235px;
-        }
+.glow-layer{
+width:180px;
+height:180px;
+border-radius:50%;
+background:radial-gradient(circle,
+rgba(6,247,156,0.6) 0%,
+rgba(6,247,156,0.35) 35%,
+rgba(6,247,156,0.1) 60%,
+transparent 85%);
+}
 
-        .outer {
-            width: 200px;
-            height: 200px;
-        }
+/* TEXT */
 
-        .inner {
-            width: 95px;
-            height: 95px;
-        }
+h1{
+font-size:28px;
+font-weight:600;
+color:#0CFBA4;
+margin-bottom:10px;
+}
 
-        .glow-layer {
-            width: 210px;
-            height: 210px;
-            border-radius: 50%;
-            background: radial-gradient(circle,
-                rgba(6,247,156,0.6) 0%,
-                rgba(6,247,156,0.45) 20%,
-                rgba(6,247,156,0.25) 40%,
-                rgba(6,247,156,0.08) 60%,
-                transparent 85%);
-            z-index: 0;
-            filter: blur(3px);
-            animation: pulseGlow 2s infinite alternate;
-        }
+.subtitle{
+font-size:14px;
+color:#8F8F99;
+margin-bottom:25px;
+}
 
-        @keyframes pulseGlow {
-            0% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
-        }
+/* BUTTON */
 
-        /* SVG circles & check */
-        svg circle, svg path {
-            vector-effect: non-scaling-stroke;
-        }
+.bot-button{
+background:#00FFA3;
+color:#010A00;
+border:none;
+letter-spacing:2px;
+font-size:14px;
+width:260px;
+height:55px;
+font-weight:bold;
+cursor:pointer;
+border-radius:10px;
+box-shadow:0 0 10px #00FFA3;
+text-transform:uppercase;
+transition:.25s;
+}
 
-        /* ===== TEXTS ===== */
-        h1 {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #0CFBA4;
-            margin-bottom: 15px;
-            text-shadow: 0 0 8px rgba(12, 251, 164, 0.3);
-        }
+.bot-button:hover{
+transform:scale(1.05);
+}
 
-        .subtitle {
-            font-size: 15px;
-            color: #8F8F99;
-            margin-bottom: 30px;
-            line-height: 1.5;
-            max-width: 380px;
-        }
+/* FOOTER */
 
-        /* ===== BOT BUTTON ===== */
-        .bot-button {
-            background-color: #00FFA3;
-            color: #010A00;
-            border: none;
-            letter-spacing: 2px;
-            font-size: 16px;
-            width: 350px;
-            height: 70px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 12px;
-            box-shadow: 0 0 15px #00FFA3, 0 4px 8px rgba(0,0,0,0.3);
-            text-transform: uppercase;
-            transition: 0.2s ease;
-            margin-top: 10px;
-        }
+.footer{
+position:fixed;
+bottom:12px;
+left:50%;
+transform:translateX(-50%);
+font-size:13px;
+letter-spacing:1px;
+color:#ffffff;
+}
 
-        .bot-button:hover {
-            transform: scale(1.03);
-            background-color: #1effb1;
-            box-shadow: 0 0 25px #00FFA3;
-        }
+.footer span{
+color:#00c3ff;
+font-weight:600;
+}
 
-        .bot-button:active {
-            transform: scale(0.98);
-        }
-
-        /* responsive adjustments for button */
-        @media screen and (max-width: 600px) {
-            .bot-button {
-                width: 300px;
-                height: 65px;
-                font-size: 15px;
-            }
-            .cardd {
-                width: 450px;
-                height: 550px;
-            }
-        }
-
-        /* small screens */
-        @media screen and (max-width: 400px) {
-            .bot-button {
-                width: 260px;
-                height: 60px;
-            }
-        }
-
-        /* footer (optional, but present in original example, can be added if needed) */
-        .footer {
-            position: fixed;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 13px;
-            letter-spacing: 1px;
-            color: #ffffff;
-            opacity: 0.7;
-        }
-
-        .footer span {
-            color: #00c3ff;
-            font-weight: 600;
-        }
-    </style>
+</style>
 </head>
+
 <body>
 
-    <!-- Fixed header -->
-    <div class="top-card">
-        <div class="top-bar">
-            <div class="profile-left">
-                <img id="profilePic" src="https://i.ibb.co/20z9rTwJ/20260227-005438.png" alt="profile"> 
-                <!-- fallback if no user photo -->
-                <div class="user-info">
-                    <strong id="profileName">Loading...</strong>
-                    <small id="profileId">ID: —</small>
-                </div>
-            </div>
-            <div class="status">ACTIVE</div>
-        </div>
-    </div>
+<div class="top-card">
+<div class="top-bar">
 
-    <!-- Main content -->
-    <div class="containerr">
-        <div class="cardd">
-            <div class="container">
-                <!-- Verification graphic with SVG and glow -->
-                <div class="verify-wrapper">
-                    <!-- outermost faint ring -->
-                    <svg class="outermost" viewBox="0 0 400 400">
-                        <circle cx="200" cy="200" r="180"
-                            fill="none"
-                            stroke="#3ED9A7"
-                            stroke-width="6"
-                            stroke-opacity="0.6"/>
-                    </svg>
-                    <!-- outer ring -->
-                    <svg class="outer" viewBox="0 0 400 400">
-                        <circle cx="200" cy="200" r="180"
-                            fill="none"
-                            stroke="#297E6C"
-                            stroke-width="8"
-                            stroke-opacity="0.8"/>
-                    </svg>
-                    <!-- glow layer (radial gradient) -->
-                    <div class="glow-layer"></div>
-                    <!-- inner filled circle + checkmark -->
-                    <svg class="inner" viewBox="0 0 400 400">
-                        <circle cx="200" cy="200" r="155"
-                            fill="#1E5652"
-                            stroke="#06F79C"
-                            stroke-width="45"
-                            stroke-opacity="0.9"/>
-                        <path
-                            d="M155 205
-                               Q170 225 190 245
-                               Q220 210 260 170"
-                            fill="none"
-                            stroke="#07FFA8"
-                            stroke-width="35"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-opacity="0.95"/>
-                    </svg>
-                </div>
+<div class="profile-left">
+<img id="profilePic">
+<div class="user-info">
+<strong id="profileName"></strong>
+<small id="profileId"></small>
+</div>
+</div>
 
-                <!-- Success text -->
-                <h1><b>Verified Successfully</b></h1>
-                <div class="subtitle">
-                    You're Verified Successfully, you can use <br> our bot now.
-                </div>
+<div class="status">ACTIVE</div>
 
-                <!-- CTA Button -->
-                <button class="bot-button" id="continueBot">CONTINUE TO BOT</button>
-            </div>
-        </div>
-    </div>
+</div>
+</div>
 
-    <!-- Optional footer (matching first example style) -->
-    <div class="footer">
-        Powered by <span>RohitXEgo</span>
-    </div>
+<div class="main">
 
-    <script>
-        // Telegram WebApp initialization
-        const tg = window.Telegram.WebApp;
-        tg.expand();
+<div class="cardd">
 
-        // Get user data
-        const user = tg.initDataUnsafe?.user;
+<div class="container">
 
-        // DOM elements
-        const profileNameEl = document.getElementById('profileName');
-        const profileIdEl = document.getElementById('profileId');
-        const profilePicEl = document.getElementById('profilePic');
+<div class="verify-wrapper">
 
-        if (user) {
-            // Set name
-            let fullName = user.first_name || '';
-            if (user.last_name) fullName += ' ' + user.last_name;
-            profileNameEl.innerText = fullName || 'User';
+<svg class="outermost" viewBox="0 0 400 400">
+<circle cx="200" cy="200" r="180"
+fill="none"
+stroke="#3ED9A7"
+stroke-width="6"/>
+</svg>
 
-            // Set ID
-            profileIdEl.innerText = 'ID: ' + (user.id || '—');
+<svg class="outer" viewBox="0 0 400 400">
+<circle cx="200" cy="200" r="180"
+fill="none"
+stroke="#297E6C"
+stroke-width="8"/>
+</svg>
 
-            // Set profile picture if available
-            if (user.photo_url) {
-                profilePicEl.src = user.photo_url;
-            } else {
-                // keep fallback
-                profilePicEl.src = 'https://i.ibb.co/20z9rTwJ/20260227-005438.png';
-            }
-        } else {
-            // Fallback if no user (e.g., local testing)
-            profileNameEl.innerText = 'Test User';
-            profileIdEl.innerText = 'ID: 123456';
-            profilePicEl.src = 'https://i.ibb.co/20z9rTwJ/20260227-005438.png';
-        }
+<div class="glow-layer"></div>
 
-        // Button action: you can customize what happens on click
-        document.getElementById('continueBot').addEventListener('click', function() {
-            // Example: close the web app or send data to bot
-            tg.close();
-            // Alternatively, you could redirect or trigger a main button
-        });
+<svg class="inner" viewBox="0 0 400 400">
+<circle cx="200" cy="200" r="155"
+fill="#1E5652"
+stroke="#06F79C"
+stroke-width="45"/>
+<path
+d="M155 205 Q170 225 190 245 Q220 210 260 170"
+fill="none"
+stroke="#07FFA8"
+stroke-width="35"
+stroke-linecap="round"
+stroke-linejoin="round"/>
+</svg>
 
-        // Optional: show main button if needed (but we have custom button)
-        // tg.MainButton.setText('CONTINUE').show().onClick(() => tg.close());
-        // We're using custom button, so we don't show MainButton.
-    </script>
+</div>
+
+<h1>Verified Successfully</h1>
+
+<div class="subtitle">
+You're verified successfully.<br>
+You can now use our bot.
+</div>
+
+<button class="bot-button">
+CONTINUE TO BOT
+</button>
+
+</div>
+</div>
+</div>
+
+<div class="footer">
+Powered by <span>RohitXEgo</span>
+</div>
+
+<script>
+
+const tg = window.Telegram.WebApp
+tg.expand()
+
+const user = tg.initDataUnsafe?.user
+
+if(user){
+
+document.getElementById("profileName").innerText =
+user.first_name + (user.last_name ? " " + user.last_name : "")
+
+document.getElementById("profileId").innerText =
+"ID: " + user.id
+
+if(user.photo_url){
+document.getElementById("profilePic").src = user.photo_url
+}
+
+}
+
+</script>
+
 </body>
-                      </html>
+</html>
