@@ -27,7 +27,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* TOP HEADER */
+/* TOP BAR */
 
 .top-card{
 width:100%;
@@ -100,7 +100,7 @@ animation:blink 2s infinite;
 100%{opacity:1}
 }
 
-/* CENTER AREA */
+/* MAIN CENTER */
 
 .containerr{
 width:100%;
@@ -108,7 +108,8 @@ max-width:1200px;
 display:flex;
 justify-content:center;
 align-items:center;
-padding-top:120px;
+padding-top:160px; /* pushes card downward */
+padding-bottom:40px;
 }
 
 /* CARD */
@@ -124,9 +125,10 @@ box-shadow:0 4px 20px rgba(0,0,0,0.6);
 display:flex;
 justify-content:center;
 align-items:center;
+transform:scaleY(0.95); /* slight vertical compression */
 }
 
-/* INNER CONTAINER */
+/* INNER CONTENT */
 
 .container{
 width:400px;
@@ -299,6 +301,7 @@ color:#5B7ECC;
 </div>
 
 <div class="containerr">
+
 <div class="cardd">
 
 <div class="container">
@@ -351,6 +354,7 @@ Establishing secure handshake...
 </div>
 
 </div>
+
 </div>
 
 <script>
