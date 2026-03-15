@@ -116,10 +116,10 @@ padding-top:70px;
 .cardd{
 width:720px;
 height:420px;
-background:linear-gradient(to bottom,#1A1830,#060606);
+background:linear-gradient(to bottom,#18162B,#000000);
 border-radius:28px;
 box-shadow:0 4px 20px rgba(0,0,0,0.6);
-border:1px solid #1F1E26;
+border:1px solid #29273C;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -133,51 +133,50 @@ align-items:center;
 text-align:center;
 }
 
-/* SUCCESS ICON */
+/* VERIFY ICON */
 
 .verify-wrapper{
 position:relative;
-width:220px;
-height:220px;
-margin-bottom:35px;
+width:200px;
+height:200px;
+margin-bottom:30px;
 }
 
-.verify-wrapper svg,
-.glow-layer{
+.verify-wrapper svg{
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
 }
 
-.outermost{width:200px;height:200px;}
-.outer{width:170px;height:170px;}
-.inner{width:90px;height:90px;}
-
 .glow-layer{
-width:180px;
-height:180px;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:170px;
+height:170px;
 border-radius:50%;
 background:radial-gradient(circle,
 rgba(6,247,156,0.6) 0%,
-rgba(6,247,156,0.35) 35%,
-rgba(6,247,156,0.1) 60%,
-transparent 85%);
+rgba(6,247,156,0.4) 30%,
+rgba(6,247,156,0.15) 50%,
+transparent 70%);
 }
 
 /* TEXT */
 
 h1{
 font-size:28px;
-font-weight:600;
 color:#0CFBA4;
 margin-bottom:10px;
 }
 
 .subtitle{
 font-size:14px;
-color:#8F8F99;
-margin-bottom:25px;
+color:#bfbfbf;
+margin-bottom:30px;
+line-height:1.4;
 }
 
 /* BUTTON */
@@ -186,16 +185,16 @@ margin-bottom:25px;
 background:#00FFA3;
 color:#010A00;
 border:none;
-letter-spacing:2px;
-font-size:14px;
+font-size:15px;
 width:260px;
 height:55px;
 font-weight:bold;
 cursor:pointer;
 border-radius:10px;
 box-shadow:0 0 10px #00FFA3;
+letter-spacing:2px;
 text-transform:uppercase;
-transition:.25s;
+transition:0.3s;
 }
 
 .bot-button:hover{
@@ -248,29 +247,25 @@ font-weight:600;
 
 <div class="verify-wrapper">
 
-<svg class="outermost" viewBox="0 0 400 400">
+<svg width="200" height="200" viewBox="0 0 400 400">
 <circle cx="200" cy="200" r="180"
 fill="none"
 stroke="#3ED9A7"
 stroke-width="6"/>
 </svg>
 
-<svg class="outer" viewBox="0 0 400 400">
-<circle cx="200" cy="200" r="180"
-fill="none"
-stroke="#297E6C"
-stroke-width="8"/>
-</svg>
-
 <div class="glow-layer"></div>
 
-<svg class="inner" viewBox="0 0 400 400">
+<svg width="120" height="120" viewBox="0 0 400 400">
 <circle cx="200" cy="200" r="155"
 fill="#1E5652"
 stroke="#06F79C"
 stroke-width="45"/>
+
 <path
-d="M155 205 Q170 225 190 245 Q220 210 260 170"
+d="M155 205
+Q170 225 190 245
+Q220 210 260 170"
 fill="none"
 stroke="#07FFA8"
 stroke-width="35"
@@ -292,7 +287,9 @@ CONTINUE TO BOT
 </button>
 
 </div>
+
 </div>
+
 </div>
 
 <div class="footer">
